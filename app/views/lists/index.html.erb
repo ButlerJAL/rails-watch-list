@@ -1,0 +1,16 @@
+<h1>All Lists</h1>
+<div style="margin-bottom: 20px;">
+  <%= link_to "Create New List", new_list_path %>
+</div>
+<ul>
+  <% @lists.each do |list| %>
+    <li>
+      <%= link_to list.name, list_path(list) %>
+      <small>(<%= list.bookmarks.count %> bookmarks)</small>
+      <%= link_to "Delete", list_path(list),
+          data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+          style: "color: red; margin-left: 10px;"
+      %>
+    </li>
+  <% end %>
+</ul>

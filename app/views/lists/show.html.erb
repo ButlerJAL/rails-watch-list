@@ -1,0 +1,21 @@
+<h1><%= @list.name %></h1>
+<h3>Bookmarks</h3>
+<% if @list.bookmarks.empty? %>
+  <p>No bookmarks yet.</p>
+<% else %>
+  <ul>
+    <% @list.bookmarks.each do |bookmark| %>
+      <li style="margin-bottom: 10px;">
+        <strong><%= bookmark.comment %></strong>
+        <%= link_to "delete",
+            bookmark_path(bookmark),
+            data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+            class: "text-danger" # simple styling class
+        %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+<hr>
+<%= link_to "Add a new bookmark", new_list_bookmark_path(@list), class: "btn-primary" %>
+<%= link_to "Back to all lists", lists_path %>
