@@ -1,4 +1,16 @@
 #!/usr/bin/env ruby
 
+# ----------------------------------------------------------
+# SSL BYPASS: Fix for macOS OpenSSL 3 CRL Errors
+# ----------------------------------------------------------
+require 'openssl'
+# Force OpenSSL to ignore revocation status checks (CRL)
+OpenSSL::SSL::SSLContext::DEFAULT_PARAMS[:verify_mode] = OpenSSL::SSL::VERIFY_NONE
+# ----------------------------------------------------------
+
 require_relative "../config/application"
+
+# NOTE: We do not need to call 'Importmap::Commands.start(ARGV)' here.
+# The importmap-rails gem includes that command at the end of its library file.
+# Simply requiring it triggers the execution automatically.
 require "importmap/commands"
