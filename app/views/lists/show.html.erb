@@ -6,11 +6,13 @@
   <ul>
     <% @list.bookmarks.each do |bookmark| %>
       <li style="margin-bottom: 10px;">
-        <strong><%= bookmark.comment %></strong>
-        <%= link_to "delete",
+        <strong><%= bookmark.movie.title %></strong>
+        <span><%= bookmark.comment %></span>
+        <%= button_to "Delete",
             bookmark_path(bookmark),
-            data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-            class: "text-danger" # simple styling class
+            method: :delete,
+            form: { style: "display:inline-block;", data: { turbo_confirm: "Are you sure you want to delete this bookmark?" } },
+            class: "btn btn-danger"
         %>
       </li>
     <% end %>
